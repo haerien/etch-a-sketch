@@ -14,8 +14,8 @@ function generateGrids(num){
             grid.style.width = 480/num+"px";
             grid.style.height = 480/num+"px";
 
-            grid.addEventListener("mouseover", ()=>{grid.classList.add("hover");})
-            grid.addEventListener("mouseleave", ()=>{grid.classList.remove("hover");})
+            grid.addEventListener("mouseover", (e)=>{changeColor(e);})
+            grid.addEventListener("mouseleave", (e)=>{changeColor(e)})
             
             container.appendChild(grid)
         }
@@ -28,6 +28,22 @@ function generateGrids(num){
 
 function removeElement(container){    
     container.remove();
+}
+
+let mousedown = false;
+document.body.onmousedown = () => mousedown=true;
+document.body.onmouseup = () => mousedown=false;
+function changeColor(e){
+    if(e.type == "mouseover" && !mousedown) {
+        e.target.classList.add("hover");
+    }
+    else if(e.type == "mouseleave"){
+        e.target.classList.remove("hover");
+    }
+    else {
+        e.target.style.backgroundColor="black"
+    }
+        
 }
 
 
