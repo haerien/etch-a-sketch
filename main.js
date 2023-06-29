@@ -1,25 +1,41 @@
-const container = document.querySelector(".container");
-function generateGrids(){
-    for(let count = 0; count<16*16; count++){
-        const grid = document.createElement("div");
-        grid.classList.add("grid");
-        grid.style.width ="30px";
-        grid.style.height ="30px";
-        
-        container.appendChild(grid);
+const body = document.querySelector("body");
+function generateGrids(num){
+    //generate container div
+    const container = document.createElement("div");
+    container.classList.add("container");
+    body.appendChild(container);
+
+    //generate grids in container
+    if(num<100){
+        for(let count = 0; count<num*num; count++){
+            const grid = document.createElement("div");
+            grid.classList.add("grid");
+
+            grid.style.width = 480/num+"px";
+            grid.style.height = 480/num+"px";
+
+            grid.addEventListener("mouseover", ()=>{grid.classList.add("hover");})
+            grid.addEventListener("mouseleave", ()=>{grid.classList.remove("hover");})
+            
+            container.appendChild(grid)
+        }
+    }
+
+    else{
+        alert("Your value needs to be smaller than 100!");
     }
 }
-generateGrids();
 
+function removeElement(container){    
+    container.remove();
+}
 
-
-
-container.childNodes.forEach(grid => grid.addEventListener("mouseover", ()=>{
-    grid.classList.add("hover");
-}))
-
-container.childNodes.forEach(grid => grid.addEventListener("mouseleave", ()=>{
-    grid.classList.remove("hover");
-}))
 
 const button = document.querySelector("button");
+button.addEventListener("click", () => {
+    let value = prompt("Enter value:");
+    removeElement(document.querySelector(".container"));
+    generateGrids(value);
+})
+//initial container generation without grids
+generateGrids(0);
