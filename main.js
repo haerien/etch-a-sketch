@@ -30,6 +30,28 @@ function removeElement(container){
     container.remove();
 }
 
+/*define color variable
+  define randomise color function
+  put buttons to change color (put it in color variable when pressed)
+  add if else to changeColor for different color*/ 
+
+const blackButton = document.querySelector(".color-button#black");
+const rainbowButton = document.querySelector(".color-button#rainbow");
+const buttons = document.querySelector(".buttons");
+
+buttons.childNodes.forEach(button => button.addEventListener("click",(e) => pickColor(e)));
+
+let penColor = "black";
+const colorName = document.querySelector("#color-name");
+function pickColor(e){
+    switch(e.target.id){
+        case "black": penColor="black"; break;
+        case "rainbow": penColor="rainbow"; break;
+    }
+    colorName.innerText = `Color: ${penColor}`;
+    
+}
+
 let mousedown = false;
 document.body.onmousedown = () => mousedown=true;
 document.body.onmouseup = () => mousedown=false;
@@ -41,7 +63,13 @@ function changeColor(e){
         e.target.classList.remove("hover");
     }
     else {
-        e.target.style.backgroundColor="black"
+        if(penColor=="rainbow"){
+            const randomR = Math.floor(Math.random()*256);
+            const randomG = Math.floor(Math.random()*256);
+            const randomB = Math.floor(Math.random()*256);
+
+            e.target.style.backgroundColor = `rgb(${randomR},${randomG},${randomB})`;
+        }
     }
         
 }
