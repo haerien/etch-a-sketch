@@ -33,7 +33,7 @@ function removeElement(container){
 
 const button = document.querySelector("button");
 button.addEventListener("click", () => {
-    let value = prompt("Enter value:");
+    let value = prompt("How many boxes do you want per row?");
     removeElement(document.querySelector(".container"));
     generateGrids(value);
 })
