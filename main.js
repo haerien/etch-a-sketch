@@ -1,9 +1,10 @@
 const body = document.querySelector("body");
+const table = document.querySelector(".table");
 function generateGrids(num){
     //generate container div
     const container = document.createElement("div");
     container.classList.add("container");
-    body.appendChild(container);
+    table.appendChild(container);
 
     //generate grids in container
     if(num<100){
@@ -24,16 +25,16 @@ function generateGrids(num){
     else{
         alert("Your value needs to be smaller than 100!");
     }
+
+    const bottomText = document.createElement("div");
+    bottomText.classList.add("bottom-text");
+    bottomText.innerText=`${num}x${num}`;
+    table.appendChild(bottomText);
 }
 
-function removeElement(container){    
-    container.remove();
-}
-
-/*define color variable
-  define randomise color function
-  put buttons to change color (put it in color variable when pressed)
-  add if else to changeColor for different color*/ 
+function removeElement(element){    
+    element.remove();
+} 
 
 const blackButton = document.querySelector(".color-button#black");
 const rainbowButton = document.querySelector(".color-button#rainbow");
@@ -43,6 +44,7 @@ buttons.childNodes.forEach(button => button.addEventListener("click",(e) => pick
 
 let penColor = "black";
 const colorName = document.querySelector("#color-name");
+colorName.innerText = `Color: ${penColor}`;
 function pickColor(e){
     switch(e.target.id){
         case "black": penColor="black"; break;
@@ -70,6 +72,9 @@ function changeColor(e){
 
             e.target.style.backgroundColor = `rgb(${randomR},${randomG},${randomB})`;
         }
+        else if(penColor=="black"){
+            e.target.style.backgroundColor="black";
+        }
     }
         
 }
@@ -79,6 +84,7 @@ const button = document.querySelector("button");
 button.addEventListener("click", () => {
     let value = prompt("How many boxes do you want per row?");
     removeElement(document.querySelector(".container"));
+    removeElement(document.querySelector(".bottom-text"));
     generateGrids(value);
 })
 //initial container generation without grids
