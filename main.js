@@ -38,6 +38,7 @@ function removeElement(element){
 
 const blackButton = document.querySelector(".color-button#black");
 const rainbowButton = document.querySelector(".color-button#rainbow");
+const eraser = document.querySelector(".color-button#eraser");
 const buttons = document.querySelector(".buttons");
 
 buttons.childNodes.forEach(button => button.addEventListener("click",(e) => pickColor(e)));
@@ -49,6 +50,7 @@ function pickColor(e){
     switch(e.target.id){
         case "black": penColor="black"; break;
         case "rainbow": penColor="rainbow"; break;
+        case "eraser": penColor="eraser"; break;
     }
     colorName.innerText = `Color: ${penColor}`;
     
@@ -72,9 +74,8 @@ function changeColor(e){
 
             e.target.style.backgroundColor = `rgb(${randomR},${randomG},${randomB})`;
         }
-        else if(penColor=="black"){
-            e.target.style.backgroundColor="black";
-        }
+        else if(penColor=="black"){e.target.style.backgroundColor="black";}
+        else if(penColor=="eraser"){e.target.style.backgroundColor="#fafafa"};
     }
         
 }
